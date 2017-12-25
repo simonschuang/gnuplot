@@ -1,0 +1,25 @@
+#!/usr/bin/gnuplot
+
+set title "GPU Fan Usage"
+
+set style data lines
+# set xtics 1 norangelimit nomirror
+set term png
+set output "/var/www/gpufan.png"
+set grid y
+set xdata time
+set ydata
+set timefmt "%Y%m%d %H:%M:%S"
+set format x "%m/%d/%H"
+set xtics rotate
+set format y "% g"
+set mytics 10
+set mxtics 5
+# set ticscale 3 1
+set ylabel "Fan usage (%) "
+set yrange [ 10.0000 : 100.0000 ] noreverse nowriteback
+set colorbox default
+
+plot '/var/log/gpufan.log' u 1:3 with line title "GPU 0", '' u 1:4 with line title "GPU 1", '' u 1:5 with line title "GPU 2", '' u 1:6 with line title "GPU 3", '' u 1:7 with line title "GPU 4", '' u 1:8 with line title "GPU 5", '' u 1:9 with line title "GPU 6", '' u 1:10 with line title "GPU 7"
+#pause -1 "Hit return to continue"
+#reset
